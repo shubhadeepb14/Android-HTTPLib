@@ -11,6 +11,11 @@ A small Android Java library built using [HttpURLConnection](https://developer.a
 
 To include this library in your project, add a new Java class named 'HTTPLib' in your project and copy-paste the whole code from 'HTTPLib.java'. After pasting the code, change the package name (currently set as 'shubhadeep.com.utils') to your project's package name.
 
+Note: HTTPLib needs 'android.permission.INTERNET' to run. Add the following line to the manifest 
+```
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
 ## Compatibility
 
 Tested on API version 21+ (Android 5.0 or above). 
@@ -39,6 +44,7 @@ HTTPLib.HTTPResponse response = jsonPostUtility.finish();
 int statusCode = response.getResponseCode();
 String responseText = response.getResponseBody();
 ```
+Note: response.getResponseCode() will return -1 if HTTPLib fails to connect the server for any reason (e.g. network error, server offline etc.). 
 
 ### 2. Multipart Form POST Request :
 
@@ -65,12 +71,17 @@ buf.read(bytes, 0, bytes.length);
 buf.close();
 multipartPostUtility.addFile("myfile", file.getName(), bytes);
 ```
+Note : Reading file needs 'android.permission.READ_EXTERNAL_STORAGE'. Add the following line to the manifest  
+```
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
 **2.e. Finish the request and get the response**
 ```
 HTTPLib.HTTPResponse response = multipartPostUtility.finish();
 int statusCode = response.getResponseCode();
 String responseText = response.getResponseBody();
 ```
+Note: response.getResponseCode() will return -1 if HTTPLib fails to connect the server for any reason (e.g. network error, server offline etc.). 
 
 ### 3. HTTP POST Request :
 
@@ -93,3 +104,4 @@ HTTPLib.HTTPResponse response = httpGetUtility.finish();
 int statusCode = response.getResponseCode();
 String responseText = response.getResponseBody();
 ```
+Note: response.getResponseCode() will return -1 if HTTPLib fails to connect the server for any reason (e.g. network error, server offline etc.). 
