@@ -1,5 +1,6 @@
 package shubhadeep.com.utils;
 
+import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -334,14 +335,23 @@ public class HTTPLib {
             if (!super.requestURL.contains("?")) {
                 super.requestURL = super.requestURL + "?";
             }
-            super.requestURL = super.requestURL + key + "=" + value.toString();
+            String strValue = "";
+            try{
+                strValue = Uri.encode(value.toString(), "utf-8");
+                super.requestURL = super.requestURL + key + "=" + strValue + "&";
+            } catch (Exception e){
+                Log.e(TAG, e.getMessage());
+            }
         }
 
         /**
-         * Completes the HTTP Post call and returns an object of the HTTPResponse class
+         * Completes the HTTP Get call and returns an object of the HTTPResponse class
          */
         public HTTPResponse finish() {
             HTTPResponse response = new HTTPResponse();
+            if (super.requestURL.endsWith("&")) {
+                super.requestURL = super.requestURL.substring(0, super.requestURL.length() - 1);
+            }
             try {
                 super.CreateConnection();
                 response.setResponseCode(super.httpConn.getResponseCode());
