@@ -1,4 +1,4 @@
-# HTTPLib
+# Android HTTPLib
 A small Android Java library built using [HttpURLConnection](https://developer.android.com/reference/java/net/HttpURLConnection) for handling HTTP POST and GET requests.
 
 ## Features
