@@ -83,7 +83,7 @@ String responseText = response.getResponseBody();
 ```
 Note: response.getResponseCode() will return -1 if HTTPLib fails to connect the server for any reason (e.g. network error, server offline etc.). 
 
-### 3. HTTP POST Request :
+### 3. HTTP GET Request :
 
 **3.a. Create JSONPostUtility Object**
 ```
